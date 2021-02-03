@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"io"
 	"net/http"
 	"strconv"
 
@@ -18,6 +19,8 @@ var todos []Todo = []Todo{}
 func main() {
 	router := mux.NewRouter()
 
+	router.HandleFunc("/", hello)
+
 	router.HandleFunc("/todos/", additem).Methods("POST")
 
 	router.HandleFunc("/todos/", getAll).Methods("GET")
@@ -25,6 +28,10 @@ func main() {
 	router.HandleFunc("/todos/{id}", deleteItem).Methods("DELETE")
 
 	http.ListenAndServe(":8000", router)
+}
+
+func hello(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "Hello World")
 }
 
 func getAll(w http.ResponseWriter, r *http.Request) {
