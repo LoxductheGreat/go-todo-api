@@ -1,4 +1,4 @@
-module todolist
+module github.com/LoxductheGreat/go-todo-api
 
 go 1.15
 
